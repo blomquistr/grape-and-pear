@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grape-and-pear"
+authors = [{ name = "Ryan Blomquist", email = "blomquist.r@gmail.com" }]
+description = "A simple echo server written in Python"
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MPL-2.0",
+]
+dependencies = ["Flask==3.0.0"]
+dynamic = ["version"]
+
+[project.scripts]
+grape-and-pear = "grape_and_pear.main:main"

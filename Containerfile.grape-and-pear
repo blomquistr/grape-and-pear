@@ -1,0 +1,41 @@
+ARG PYTHON_VERSION=3.11
+FROM docker.io/python:${PYTHON_VERSION}-bullseye AS build
+
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN pip install --upgrade --no-cache-dir pip .
+
+FROM docker.io/python:${PYTHON_VERSION}-slim-bullseye AS run
+
+ARG USER=grape-and-pear
+ARG GROUP=grape-and-pear
+ARG UID=1001
+ARG GID=1001
+ARG USER_AGENT_HOME=/home/${USER}
+
+ENV USER=${USER}
+ENV GROUP=${GROUP}
+ENV UID=${UID}
+ENV GID=${GID}
+ENV USER_AGENT_HOME=${USER_AGENT_HOME}
+
+RUN groupadd -g ${GID} ${GROUP} \
+  && useradd -d ${USER_AGENT_HOME} -u ${UID} -g ${GID} -m -s /bin/bash ${USER}
+
+COPY --from=build --chown=${UID}:${GID} /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+ARG HOST="0.0.0.0"
+ARG PORT="8080"
+
+ENV HOST=${HOST}
+ENV PORT=${PORT}
+
+USER ${USER}
+
+CMD ["grape-and-pear", "--host", "${HOST}", "--port", "${PORT}"]
