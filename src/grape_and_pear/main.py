@@ -32,6 +32,7 @@ def headers():
         "response": dict(),
     }
 
+    print("Request headers:")
     for header in headers["request"]:
         print(f"Request Header: {header}: {headers['request'][header]}")
 
