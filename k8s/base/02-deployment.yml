@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: grape-and-pear
+  namespace: fruit
+  metadata:
+    labels:
+      app: grape-and-pear
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: grape-and-pear
+  template:
+    metadata:
+      labels:
+        app: grape-and-pear
+    spec:
+      containers:
+        - name: grape-and-pear
+          image: docker.io/lunarfish/grape-and-pear:latest
+          ports:
+            - containerPort: 5001

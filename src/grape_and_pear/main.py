@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -18,6 +18,24 @@ def grape():
 @app.route("/pear")
 def pear():
     return ("pear", 200)
+
+
+@app.route("/headers")
+def headers():
+    """Endpoint to dump request and response headers.
+
+    Useful for testing a reverse proxy configuration.
+    """
+
+    headers = {
+        "request": dict(request.headers),
+        "response": dict(),
+    }
+
+    for header in headers["request"]:
+        print(f"Request Header: {header}: {headers['request'][header]}")
+
+    return ("ok", 200)
 
 
 def main() -> None:

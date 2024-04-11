@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grape-and-pear
+  namespace: fruit
+  labels:
+    app: grape-and-pear
+spec:
+  type: ClusterIP
+  selector:
+    app: grape-and-pear
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5001
+    - protocol: TCP
+      port: 443
+      targetPort: 5001
