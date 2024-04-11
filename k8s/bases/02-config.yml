@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grape-and-pear
+  labels:
+    app.kubernetes.io/name: grape-and-pear
+    app.kubernetes.io/instance: grape-and-pear
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: kustomize
+data:
+  GRAPE_AND_PEAR_HOST: "0.0.0.0"
+  GRAPE_AND_PEAR_PORT: "8443"
