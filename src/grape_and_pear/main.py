@@ -53,10 +53,12 @@ def main() -> None:
     )
     parser.add_argument(
         "--port",
-        type=str,
-        default=os.environ.get(
-            "GRAPE_AND_PEAR_PORT",
-            "5001",
+        type=int,
+        default=int(
+            os.environ.get(
+                "GRAPE_AND_PEAR_PORT",
+                "5001",
+            )
         ),
     )
     parser.add_argument("--debug", action="store_true")

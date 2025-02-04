@@ -33,9 +33,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 ARG HOST="0.0.0.0"
 ARG PORT="8080"
 
-ENV HOST=$(HOST)
-ENV PORT=$(PORT)
+ENV HOST=${HOST}
+ENV PORT=${PORT}
 
 USER ${USER}
 
-CMD ["grape-and-pear", "--host", "$HOST", "--port", "$PORT"]
+CMD ["grape-and-pear"]
